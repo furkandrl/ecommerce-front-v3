@@ -22,29 +22,47 @@ export class AppComponent {
     password:''
   };*/
 
+  cartItems: any[]= [];
+
+  loginObj:any={
+    "username":"",
+    "password":""
+  }
+
+  registerObj:any={
+    "username":"",
+    "firstName":"",
+    "lastName":"",
+    "password":""
+  }
+  
+  loginModelClass = 'show';
+  
   constructor(private accountService:AccountService, private productService:ProductService, 
-    router:Router){}
+    private router:Router){}
 
-  onRegister(registerObj:CustomerRegister){
-    this.accountService.registerCustomer(registerObj).subscribe((res:CustomerRes) => {
-
+  onRegister(){
+    this.accountService.registerCustomer(this.registerObj).subscribe((res:CustomerLoginRes) => {
+      this.router.navigateByUrl('/')
     },
     (error:Error) => alert(error.message))
     
   }
 
-  onLogin(loginObj:CustomerLogin){
-    this.accountService.loginCustomer(loginObj).subscribe((res:CustomerLoginRes) => {
+  onLogin(){
+    this.accountService.loginCustomer(this.loginObj).subscribe((res:CustomerLoginRes) => {
       if(res.jwtToken){
         localStorage.removeItem('customer_token')
         localStorage.setItem('customer_token', res.jwtToken)
         this.loggedCustomer=localStorage.getItem('customer_token')
-        this.router.naviagteByUrl('/')
+        this.router.navigateByUrl('/')
       }
     },
     (error:Error) => alert(error.message))
   }
 
+  removeItem(productCode:number){
+  }
 
 
 }
