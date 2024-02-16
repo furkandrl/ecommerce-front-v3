@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject} from 'rxjs';
 import { ProductListRes } from '../interfaces/responses/product-list-res';
 import { ProductRes } from '../interfaces/responses/product-res';
 
@@ -8,6 +8,10 @@ import { ProductRes } from '../interfaces/responses/product-res';
   providedIn: 'root'
 })
 export class ProductService {
+
+  headers = new HttpHeaders ({
+    'Authorization': 'Bearer '+localStorage.getItem('customer_token')
+  });
 
   constructor(private http: HttpClient) { }
 

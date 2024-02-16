@@ -1,5 +1,5 @@
 export interface CustomerLoginRes {
-    jwtToken:string;
+    token:string;
 
     expiresIn:number;
 }

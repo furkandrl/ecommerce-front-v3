@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { CustomerRegister } from '../interfaces/requests/customer-register';
 import { CustomerLogin } from '../interfaces/requests/customer-login';
@@ -9,6 +9,8 @@ import { CustomerLoginRes } from '../interfaces/responses/customer-login-res';
   providedIn: 'root'
 })
 export class AccountService {
+
+  showLogin: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 

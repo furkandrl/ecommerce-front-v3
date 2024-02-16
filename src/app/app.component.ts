@@ -36,10 +36,16 @@ export class AppComponent {
     "password":""
   }
   
-  loginModelClass = 'show';
+  loginModelClass:string = '';
   
   constructor(private accountService:AccountService, private productService:ProductService, 
-    private router:Router){}
+    private router:Router){
+      this.accountService.showLogin.subscribe((res: boolean)=>{
+        if(res) {
+           this.loginModelClass = 'show';
+        }
+    })
+  }
 
   onRegister(){
     this.accountService.registerCustomer(this.registerObj).subscribe((res:CustomerLoginRes) => {
@@ -51,10 +57,11 @@ export class AppComponent {
 
   onLogin(){
     this.accountService.loginCustomer(this.loginObj).subscribe((res:CustomerLoginRes) => {
-      if(res.jwtToken){
+      if(res.token){
         localStorage.removeItem('customer_token')
-        localStorage.setItem('customer_token', res.jwtToken)
-        this.loggedCustomer=localStorage.getItem('customer_token')
+        localStorage.setItem('customer_token', JSON.stringify(res.token));
+        //this.loggedCustomer=localStorage.getItem('customer_token')
+        this.loginModelClass = '';
         this.router.navigateByUrl('/')
       }
     },
