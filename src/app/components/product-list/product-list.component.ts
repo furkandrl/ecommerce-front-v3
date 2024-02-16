@@ -15,6 +15,7 @@ export class ProductListComponent {
   constructor(private productService:ProductService, private accountService:AccountService, private cartService:CartService){
 
   }
+  
   productsArray:any[] = [];
   selectedCategory:any={};
 
@@ -37,8 +38,10 @@ export class ProductListComponent {
     if(localStorage.getItem('customer_token')==undefined){
       this.accountService.showLogin.next(true);
     }else{
-      this.cartService.addProductToCart(productCode,1);
-    }
+      this.cartService.addProductToCart(productCode,1).subscribe((res:any) => {
+        console.log(res);
+    })
   }
+}
 
 }

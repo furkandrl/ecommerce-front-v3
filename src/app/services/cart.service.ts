@@ -12,6 +12,7 @@ export class CartService {
   
 
   addProductToCart(productCode:string, qty:number): Observable<any> {
-    return this.http.post<any>("http://localhost:8080/cart/add-product"+productCode, qty, this.headers);
+    console.log(productCode)
+    return this.http.post<any>("http://localhost:8080/cart/add-product?productCode="+productCode+"&qty="+qty,{productCode,qty});
   }
 }

@@ -8,8 +8,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
