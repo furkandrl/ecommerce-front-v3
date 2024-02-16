@@ -11,6 +11,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 
 
 @NgModule({
@@ -21,12 +22,13 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     FooterComponent,
     ProductListComponent,
     ProductDetailComponent,
+    NotificationModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
