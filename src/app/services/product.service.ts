@@ -9,10 +9,6 @@ import { ProductRes } from '../interfaces/responses/product-res';
 })
 export class ProductService {
 
-  headers = new HttpHeaders ({
-    'Authorization': 'Bearer '+localStorage.getItem('customer_token')
-  });
-
   constructor(private http: HttpClient) { }
 
   getAllProductsByCategory(categoryCode:string): Observable<ProductListRes> {

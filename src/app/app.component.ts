@@ -59,7 +59,7 @@ export class AppComponent {
     this.accountService.loginCustomer(this.loginObj).subscribe((res:CustomerLoginRes) => {
       if(res.token){
         localStorage.removeItem('customer_token')
-        localStorage.setItem('customer_token', JSON.stringify(res.token));
+        localStorage.setItem('customer_token', res.token);
         //this.loggedCustomer=localStorage.getItem('customer_token')
         this.loginModelClass = '';
         this.router.navigateByUrl('/')

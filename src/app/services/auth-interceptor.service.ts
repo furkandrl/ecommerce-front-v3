@@ -24,7 +24,7 @@ export class AuthInterceptorService {
           Authorization: `Bearer ${token}`
           
         }
-      });console.log(token)
+      });console.log(request.headers)
     }
 
     return next.handle(request);
