@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NotificationModalComponent } from './components/notification-modal/noti
     ProductListComponent,
     ProductDetailComponent,
     NotificationModalComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
