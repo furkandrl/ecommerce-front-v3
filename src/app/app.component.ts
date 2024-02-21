@@ -6,6 +6,9 @@ import { CustomerLoginRes } from './interfaces/responses/customer-login-res';
 import { Router } from '@angular/router';
 import { CustomerRegister } from './interfaces/requests/customer-register';
 import { CustomerRes } from './interfaces/responses/customer-res';
+import { CartService } from './services/cart.service';
+import { CartRes } from './interfaces/responses/cart-res';
+import { EntryRes } from './interfaces/responses/entry-res';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +19,12 @@ export class AppComponent {
   title = 'ecommerce-front-v3';
 
   loggedCustomer:any = {};
-/*
-  loginObj:CustomerLogin={
-    username:'',
-    password:''
-  };*/
+  
+  cartEntries: EntryRes[]= [];
 
-  cartItems: any[]= [];
+  cartPrice: any;
+
+  cartItemCount: any;
 
   loginObj:any={
     "username":"",
@@ -35,16 +37,28 @@ export class AppComponent {
     "lastName":"",
     "password":""
   }
+
+
+  isLogged:boolean=true;
   
   loginModelClass:string = '';
   
   constructor(private accountService:AccountService, private productService:ProductService, 
-    private router:Router){
+    private router:Router, private cartService: CartService){
       this.accountService.showLogin.subscribe((res: boolean)=>{
         if(res) {
            this.loginModelClass = 'show';
         }
     })
+    
+      this.accountService.isLogged.subscribe((res: boolean)=>{
+        this.isLogged=true;
+      })
+      
+  }
+
+  ngOnInit(): void {
+    this.getCartForCustomer();
   }
 
   onRegister(){
@@ -60,7 +74,8 @@ export class AppComponent {
       if(res.token){
         localStorage.removeItem('customer_token')
         localStorage.setItem('customer_token', res.token);
-        //this.loggedCustomer=localStorage.getItem('customer_token')
+        this.accountService.isLogged.next(true);
+        this.isLogged=true;
         this.loginModelClass = '';
         this.router.navigateByUrl('/')
       }
@@ -68,8 +83,27 @@ export class AppComponent {
     (error:Error) => alert(error.message))
   }
 
-  removeItem(productCode:number){
+  logout(){
+    localStorage.removeItem('customer_token')
+    this.isLogged=false;
+    this.accountService.isLogged.next(false);
+    alert('You logged out.')
+    this.router.navigateByUrl('/')
+  }
+  
+
+  removeItem(productCode:string){
+    
   }
 
+  getCartForCustomer(){
+    this.cartService.getCartForCustomer().subscribe((res:CartRes) => {
+      this.cartPrice = res.totalPriceOfProducts;
+      this.cartItemCount =res.numberOfProducts;
+      this.cartEntries=res.entries;
+      
+
+    })
+  }
 
 }

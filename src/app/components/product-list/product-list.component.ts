@@ -39,8 +39,8 @@ export class ProductListComponent {
       this.accountService.showLogin.next(true);
     }else{
       this.cartService.addProductToCart(productCode,1).subscribe((res:any) => {
-        console.log(res);
     })
+    alert("Product added to cart.");
   }
 }
 

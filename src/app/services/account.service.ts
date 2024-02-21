@@ -12,6 +12,8 @@ export class AccountService {
 
   showLogin: Subject<boolean> = new Subject<boolean>();
 
+  isLogged: Subject<boolean> = new Subject<boolean>();
+
   constructor(private http: HttpClient) { }
 
   registerCustomer(customerRegister:CustomerRegister): Observable<CustomerLoginRes> {

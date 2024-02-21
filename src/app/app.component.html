@@ -49,21 +49,21 @@
                           <i class="fa fa-shopping-bag fa-2x" style="color: #202122;"></i>
                       </a>
                        <ul class="dropdown-menu menuOnLeft   rounded-0 mt-2" aria-labelledby="navbarDropdown3">
-                         <ng-container *ngIf="cartItems.length != 0">
-                            <li class="p-2" *ngFor="let item of cartItems"> 
+                         <ng-container *ngIf="cartEntries.length != 0">
+                            <li class="p-2" *ngFor="let item of cartEntries"> 
                                 <div class="d-flex w-100 border-bottom justify-content-evenly">
                                    <div>
-                                    <img style="height: 80px !important;" class="img-fluid     p-2" [src]="item.productImageUrl"
+                                    <img style="height: 80px !important;" class="img-fluid     p-2" [src]="item.product.picture"
                                     alt="">
                                    </div> 
-                                    <div style="">
+                                    <div >
                                         <a href="#" class="text-decoration-none text-black fw-semibold">
-                                            <p class="m-0 p-0">{{item.productName |slice:0-10}}</p>
+                                            <p class="m-0 p-0">{{item.product.name |slice:0-10}}</p>
                                         </a>
-                                        <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ {{item.productPrice}}</p>
+                                        <p>{{item.quantity}} x <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> ${{item.product.price}}</p>
                                     </div>
-                                    <button type="button" class="btn fs-5 closeBtn" (click)="removeItem(item.productCode    )"><i
-                                            class="fa-solid fa-xmark"></i></button>
+                                    <button type="button" class="btn fs-5 closeBtn" (click)="removeItem(item.product.code)"><i
+                                            class="fa fa-times text-danger"></i></button>
                                 </div>
   
                             </li>
@@ -71,8 +71,8 @@
                             <li class="p-2">
                                 <div class=" w-100 ">
                                     <div class="d-flex justify-content-between">
-                                        <h6>SubTotal :</h6>
-                                        <h6>$159.00</h6>
+                                        <h6>Subtotal :</h6>
+                                        <h6>${{cartPrice}}</h6>
                                     </div>
                                     <div class="d-flex justify-content-evenly mt-2">
                                         <button class="btn btn-dark rounded-0 px-3"> View Cart</button>
@@ -83,7 +83,7 @@
                                 </div>
                             </li>
                          </ng-container> 
-                         <ng-container *ngIf="cartItems.length == 0">
+                         <ng-container *ngIf="cartEntries.length == 0">
                             <li class="p-2">
                                 <div class=" w-100 text-center">
                                      <h6>Cart Is Empty</h6>
@@ -100,7 +100,7 @@
                           <i class="fas fa-user fa-2x" style="color: #266cb1;"></i>
                       </a>
                       <ul class="dropdown-menu" style="left:-50px" aria-labelledby="navbarDropdown">
-                          <li *ngIf="loggedCustomer">
+                          <li *ngIf="!isLogged">
                               <div class="d-flex justify-content-evenly mt-2"> 
                                   <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                   aria-controls="offcanvasRight"> <button
@@ -110,9 +110,9 @@
                                           class="btn btn-danger rounded-0 px-3">Register</button></a>
                               </div>
                         </li>
-                        <li *ngIf="loggedCustomer!=null">
-                             {{loggedCustomer.accessToken}}  
-                             <button class="btn btn-danger rounded-0 px-3">Logout</button>
+                        <li *ngIf="isLogged">
+                               
+                             <button class="btn btn-danger rounded-0 px-3" (click)="logout()">Logout</button>
                             
                             
                                     
