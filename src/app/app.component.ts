@@ -92,6 +92,8 @@ export class AppComponent {
   
 
   removeItem(productCode:string){
+    this.cartService.removeProductFromCart(productCode).subscribe((res:any) => {
+    })
     
   }
 
