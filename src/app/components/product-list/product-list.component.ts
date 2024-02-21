@@ -4,6 +4,7 @@ import { CategoryRes } from '../../interfaces/responses/category-res';
 import { ProductListRes } from '../../interfaces/responses/product-list-res';
 import { AccountService } from '../../services/account.service';
 import { CartService } from '../../services/cart.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,22 +13,23 @@ import { CartService } from '../../services/cart.service';
 })
 export class ProductListComponent {
 
-  constructor(private productService:ProductService, private accountService:AccountService, private cartService:CartService){
+  constructor(private productService:ProductService, private accountService:AccountService, private cartService:CartService,
+    private categoryService:CategoryService){
 
   }
   
   productsArray:any[] = [];
-  selectedCategory:any={};
+  categoriesArray:any[]=[];
+  selectedCategory:string="cat1";
 
   ngOnInit(): void {
+    this.getAllCategories();
     this.getProductsByCateogry();
   }
   
-  
-
 
   getProductsByCateogry() {
-    this.productService.getAllProductsByCategory("cat1").subscribe((res: ProductListRes) =>{
+    this.productService.getAllProductsByCategory(this.selectedCategory).subscribe((res: ProductListRes) =>{
       this.productsArray = res.products;
       this.selectedCategory=res.category.name;
     })
@@ -44,4 +46,21 @@ export class ProductListComponent {
   }
 }
 
+  getAllCategories(){
+    this.categoryService.getCategories().subscribe((res:CategoryRes[])=>{
+      this.categoriesArray = res.map(entry => entry);
+    })
+  }
+
+  selectCategory(categoryCode:string){
+    this.selectedCategory=categoryCode;
+    this.productService.getAllProductsByCategory(this.selectedCategory).subscribe((res: ProductListRes) =>{
+      this.productsArray = res.products;
+      this.selectedCategory=res.category.name;
+    })
+  }
 }
+
+
+
+

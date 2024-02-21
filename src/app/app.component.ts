@@ -105,6 +105,7 @@ export class AppComponent {
     })
   }
 
+
   reloadCurrentRoute() {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
