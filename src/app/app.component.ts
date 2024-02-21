@@ -39,7 +39,7 @@ export class AppComponent {
   }
 
 
-  isLogged:boolean=true;
+  isLogged:boolean=false;
   
   loginModelClass:string = '';
   
@@ -50,20 +50,19 @@ export class AppComponent {
            this.loginModelClass = 'show';
         }
     })
-    
-      this.accountService.isLogged.subscribe((res: boolean)=>{
-        this.isLogged=true;
-      })
-      
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem('customer_token')){
+      this.isLogged=true;
+    }
     this.getCartForCustomer();
   }
 
+
   onRegister(){
     this.accountService.registerCustomer(this.registerObj).subscribe((res:CustomerLoginRes) => {
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl('')
     },
     (error:Error) => alert(error.message))
     
@@ -77,18 +76,18 @@ export class AppComponent {
         this.accountService.isLogged.next(true);
         this.isLogged=true;
         this.loginModelClass = '';
-        this.router.navigateByUrl('/')
+        window.location.reload();
       }
+      
     },
     (error:Error) => alert(error.message))
   }
 
   logout(){
     localStorage.removeItem('customer_token')
-    this.isLogged=false;
-    this.accountService.isLogged.next(false);
-    alert('You logged out.')
-    this.router.navigateByUrl('/')
+    alert('You logged out.');
+    window.location.reload();
+    
   }
   
 
@@ -104,6 +103,13 @@ export class AppComponent {
       
 
     })
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 
 }

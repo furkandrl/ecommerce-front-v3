@@ -100,7 +100,7 @@
                           <i class="fas fa-user fa-2x" style="color: #266cb1;"></i>
                       </a>
                       <ul class="dropdown-menu" style="left:-50px" aria-labelledby="navbarDropdown">
-                          <li *ngIf="!isLogged">
+                          <li *ngIf="!isLogged else Logged">
                               <div class="d-flex justify-content-evenly mt-2"> 
                                   <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                   aria-controls="offcanvasRight"> <button
@@ -110,15 +110,14 @@
                                           class="btn btn-danger rounded-0 px-3">Register</button></a>
                               </div>
                         </li>
-                        <li *ngIf="isLogged">
-                               
-                             <button class="btn btn-danger rounded-0 px-3" (click)="logout()">Logout</button>
-                            
-                            
-                                    
+                        
+                        <li  >
+                              <ng-template #Logged>
+                             <button class="btn btn-danger rounded-0 px-3" (click)="logout()">Logout</button>  
+                            </ng-template>
                       </li>
+
                       </ul> 
-                      
                   </li>
                  
                   
