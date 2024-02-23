@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
+import { EntryRes } from '../../interfaces/responses/entry-res';
+import { CartRes } from '../../interfaces/responses/cart-res';
 
 @Component({
   selector: 'app-cart',
@@ -8,8 +10,18 @@ import { CartService } from '../../services/cart.service';
 })
 export class CartComponent {
 
+  cartEntries: EntryRes[]= [];
+
+  cartPrice: any;
+
+  cartItemCount: any;
+
   constructor(private cartService: CartService){
     
+  }
+
+  ngOnInit(){
+    this.getCartForCustomer();
   }
 
   removeItem(productCode:string){
@@ -17,5 +29,15 @@ export class CartComponent {
     })
     
   }
+
+  getCartForCustomer(){
+    this.cartService.getCartForCustomer().subscribe((res:CartRes) => {
+      this.cartPrice = res.totalPriceOfProducts;
+      this.cartItemCount =res.numberOfProducts;
+      this.cartEntries=res.entries;
+    })
+  }
+
+
 
 }
