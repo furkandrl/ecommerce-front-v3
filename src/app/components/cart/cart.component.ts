@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { EntryRes } from '../../interfaces/responses/entry-res';
 import { CartRes } from '../../interfaces/responses/cart-res';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -27,7 +28,7 @@ export class CartComponent {
   removeItem(productCode:string){
     this.cartService.removeProductFromCart(productCode).subscribe((res:any) => {
     })
-    
+    this.getCartForCustomer();
   }
 
   getCartForCustomer(){
@@ -38,6 +39,15 @@ export class CartComponent {
     })
   }
 
+  updateQuantity(productCode:string, qty:number){
+    this.cartService.updateQuantityOfProduct(productCode, qty).subscribe((res:any) =>{
+      
+        debugger;
+        window.location.reload();
+      
+    })
+    window.location.reload();
+  }
 
 
 }

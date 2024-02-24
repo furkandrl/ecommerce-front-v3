@@ -39,7 +39,7 @@
                                         <a href="#" class="text-decoration-none text-black fw-semibold">
                                             <p class="m-0 p-0">{{item.product.name |slice:0-10}}</p>
                                         </a>
-                                        <p>{{item.quantity}} x <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> ${{item.product.price}}</p>
+                                        <p>{{item.quantity}} x <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> ${{item.product.price | number: '1.2-2'}}</p>
                                     </div>
                                     <button type="button" class="btn fs-5 closeBtn" (click)="removeItem(item.product.code)"><i
                                             class="fa fa-times text-danger"></i></button>

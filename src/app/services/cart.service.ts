@@ -24,8 +24,8 @@ export class CartService {
     return this.http.post<any>("http://localhost:8080/cart/remove-product?productCode="+productCode,{productCode});
   }
 
-  updateQuantityOfProduct(){
-
+  updateQuantityOfProduct(productCode:string, qty:number): Observable<any> {
+    return this.http.post<any>("http://localhost:8080/cart/update-qty?productCode="+productCode+"&qty="+qty,{productCode,qty});
   }
 
 }

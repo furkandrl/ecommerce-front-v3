@@ -62,7 +62,7 @@ export class AppComponent {
 
   onRegister(){
     this.accountService.registerCustomer(this.registerObj).subscribe((res:CustomerLoginRes) => {
-      this.router.navigateByUrl('')
+      window.location.reload();
     },
     (error:Error) => alert(error.message))
     
@@ -94,16 +94,15 @@ export class AppComponent {
   removeItem(productCode:string){
     this.cartService.removeProductFromCart(productCode).subscribe((res:any) => {
     })
+    this.getCartForCustomer();
     
   }
 
-  getCartForCustomer(){
+  public getCartForCustomer(){
     this.cartService.getCartForCustomer().subscribe((res:CartRes) => {
       this.cartPrice = res.totalPriceOfProducts;
       this.cartItemCount =res.numberOfProducts;
       this.cartEntries=res.entries;
-      
-
     })
   }
 

@@ -100,7 +100,7 @@
                                         <h4>{{product.name}}</h4>
                                         
                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-0">${{product.price}}</p>
+                                            <p class="text-dark fs-5 fw-bold mb-0">${{product.price | number: '1.2-2'}}</p>
                         
                                                 <button class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" (click)="addToCart(product.code)"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                                                 </button>

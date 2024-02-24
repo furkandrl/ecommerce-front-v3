@@ -5,6 +5,7 @@ import { ProductListRes } from '../../interfaces/responses/product-list-res';
 import { AccountService } from '../../services/account.service';
 import { CartService } from '../../services/cart.service';
 import { CategoryService } from '../../services/category.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +15,7 @@ import { CategoryService } from '../../services/category.service';
 export class ProductListComponent {
 
   constructor(private productService:ProductService, private accountService:AccountService, private cartService:CartService,
-    private categoryService:CategoryService){
+    private categoryService:CategoryService, private appComponent:AppComponent){
 
   }
   
@@ -43,6 +44,7 @@ export class ProductListComponent {
       this.cartService.addProductToCart(productCode,1).subscribe((res:any) => {
     })
     alert("Product added to cart.");
+    this.appComponent.getCartForCustomer();
   }
 }
 

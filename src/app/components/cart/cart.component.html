@@ -24,28 +24,28 @@
                             <p class="mb-0 mt-4">{{item.product.name}}</p>
                         </td>
                         <td>
-                            <p class="mb-0 mt-4">${{item.product.price}}</p>
+                            <p class="mb-0 mt-4">${{item.product.price | number: '1.2-2'}}</p>
                         </td>
                         <td>
                             <div class="input-group quantity mt-4" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" *ngIf="item.quantity>1" (click)="updateQuantity(item.product.code, item.quantity-1)">
                                     <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
                                 <input type="text" class="form-control form-control-sm text-center border-0" value="{{item.quantity}}">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border" (click)="updateQuantity(item.product.code, item.quantity+1)">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <p class="mb-0 mt-4">5.98 $</p>
+                            <p class="mb-0 mt-4">${{item.product.price*item.quantity | number: '1.2-2'}}</p>
                         </td>
                         <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" onclick="removeItem(item.prouct.code)" >
+                            <button class="btn btn-md rounded-circle bg-light border mt-4" (click)="removeItem(item.product.code)" >
                                 <i class="fa fa-times text-danger"></i>
                             </button>
                         </td>
@@ -64,7 +64,7 @@
                         <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 me-4">Subtotal:</h5>
-                            <p class="mb-0">${{cartPrice}}</p>
+                            <p class="mb-0">${{cartPrice | number: '1.2-2'}}</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-0 me-4">Shipping</h5>
