@@ -6,6 +6,7 @@ import { AccountService } from '../../services/account.service';
 import { CartService } from '../../services/cart.service';
 import { CategoryService } from '../../services/category.service';
 import { AppComponent } from '../../app.component';
+import { ProductRes } from '../../interfaces/responses/product-res';
 
 @Component({
   selector: 'app-product-list',
@@ -22,10 +23,12 @@ export class ProductListComponent {
   productsArray:any[] = [];
   categoriesArray:any[]=[];
   selectedCategory:string="cat1";
+  recommendedProducts:ProductRes[]=[];
 
   ngOnInit(): void {
     this.getAllCategories();
     this.getProductsByCateogry();
+    this.getRecommendedProducts();
   }
   
 
@@ -59,6 +62,12 @@ export class ProductListComponent {
     this.productService.getAllProductsByCategory(this.selectedCategory).subscribe((res: ProductListRes) =>{
       this.productsArray = res.products;
       this.selectedCategory=res.category.name;
+    })
+  }
+
+  getRecommendedProducts(){
+    this.productService.getRecommendedProducts().subscribe((res: ProductListRes) =>{
+      this.recommendedProducts = res.products;
     })
   }
 }

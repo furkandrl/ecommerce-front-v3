@@ -36,6 +36,7 @@ a:hover {
     height: 200px !important;
     width: 100% !important;
     margin-top: 0% !important;
+    cursor: pointer;
 }
 
 .nav-yellow {

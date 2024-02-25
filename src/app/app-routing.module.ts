@@ -22,6 +22,9 @@ const routes: Routes = [
   {
     path:'checkout',
     component: CheckoutComponent
+  },
+  { path: 'p/:productCode', 
+    component: ProductDetailComponent 
   }
 
 ];
