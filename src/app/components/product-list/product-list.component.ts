@@ -15,20 +15,25 @@ import { ProductRes } from '../../interfaces/responses/product-res';
 })
 export class ProductListComponent {
 
-  constructor(private productService:ProductService, private accountService:AccountService, private cartService:CartService,
-    private categoryService:CategoryService, private appComponent:AppComponent){
-
-  }
-  
   productsArray:any[] = [];
   categoriesArray:any[]=[];
   selectedCategory:string="cat1";
   recommendedProducts:ProductRes[]=[];
+  showRecommended:boolean=false;
+
+  constructor(private productService:ProductService, private accountService:AccountService, private cartService:CartService,
+    private categoryService:CategoryService, private appComponent:AppComponent){
+    
+  }
+  
+  
+
 
   ngOnInit(): void {
     this.getAllCategories();
     this.getProductsByCateogry();
     this.getRecommendedProducts();
+    
   }
   
 
