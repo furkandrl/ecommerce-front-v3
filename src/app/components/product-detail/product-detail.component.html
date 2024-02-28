@@ -6,30 +6,31 @@
                 <div class="row g-4">
                     <div class="col-lg-4" >
                         <div class="border rounded">
-                            <img src="{{product.picture}}" class="img-fluid rounded" alt="Image">
+                            <img src="{{product.picture}}" class="img-fluid rounded" [routerLink]="['/p', product.code]" alt="Image">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <h4 class="fw-bold mb-3">{{product.name}}</h4>
-                        <p class="mb-3">Category: {{product.category}}</p>
+                        <p class="mb-3">Product Code: {{product.code}}</p>
                         <h5 class="fw-bold mb-3">${{product.price | number: '1.2-2'}}</h5>
                         
                         <p class="mb-4">{{product.description}}</p>
                         
                         <div class="input-group quantity mb-5" style="width: 100px;">
                             <div class="input-group-btn">
-                                <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                <button class="btn btn-sm btn-minus rounded-circle bg-light border" (click)="decrementQuantity()">
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                            <input type="text" class="form-control form-control-sm text-center border-0" value="{{selectedQty}}">
                             <div class="input-group-btn">
-                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                <button class="btn btn-sm btn-plus rounded-circle bg-light border" (click)="incrementQuantity()">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                        <button class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" (click)="addToCartMultiple(product.code, selectedQty)"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                        </button>
                     </div>
                     
                 </div>
@@ -40,14 +41,14 @@
                         <h4 class="mb-4">Similar Products</h4>
                         <div class="d-flex align-items-center justify-content-start" *ngFor="let product of similarProducts.slice(0, 3)">
                             <div class="rounded me-4" >
-                                <img src="https://picsum.photos/400" style="height: 150px;border-radius:5%;" alt="">
+                                <img src="{{product.picture}}" style="height: 150px;border-radius:5%; cursor:pointer;" [routerLink]="['/p', product.code]" alt="">
                             </div>
                             <div>
                                 <h6 class="mb-2">{{product.name}}</h6>
                                 <div class="d-flex mb-2">
                                     <h5 class="fw-bold me-2">${{product.price | number: '1.2-2'}}</h5>
                                 </div>
-                                <button class="btn border border-secondary rounded-pill px-2 py-2 mb-2 text-primary" ><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                <button class="btn border border-secondary rounded-pill px-2 py-2 mb-4 text-primary" (click)="addToCart(product.code)"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                                 </button>
                             </div>
                         </div>
@@ -56,6 +57,7 @@
                 </div>
             </div>
         </div>
+        <!--
         <div class="container py-5">
         <h1 class="fw-bold mb-0">Related products</h1>
         &nbsp;
@@ -83,10 +85,10 @@
                 </div>
             </div>
         </div>
-    
+       
     
 
-</div>
+</div> -->
     </div>
     </div>
 

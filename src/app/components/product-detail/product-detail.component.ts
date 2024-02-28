@@ -3,6 +3,9 @@ import { ProductService } from '../../services/product.service';
 import { ProductListRes } from '../../interfaces/responses/product-list-res';
 import { ProductRes } from '../../interfaces/responses/product-res';
 import { ActivatedRoute } from '@angular/router';
+import { AccountService } from '../../services/account.service';
+import { AppComponent } from '../../app.component';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,8 +17,10 @@ export class ProductDetailComponent {
   similarProducts: ProductRes[]=[];
   product: any={};
   productCode :string='';
+  selectedQty: number=1;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute){}
+  constructor(private productService: ProductService, private route: ActivatedRoute, private accountService:AccountService,
+    private appComponent:AppComponent, private cartService:CartService){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -35,6 +40,39 @@ export class ProductDetailComponent {
     this.productService.getSimilarProductsByProductCode(productCode).subscribe((res:ProductListRes) =>{
         this.similarProducts = res.products;
     })
+  }
+
+  addToCartMultiple(productCode:string, qty:number){
+    if(localStorage.getItem('customer_token')==undefined){
+      this.accountService.showLogin.next(true);
+    }else{
+      this.cartService.addProductToCart(productCode, qty).subscribe((res:any) => {
+    })
+    alert("Product added to cart.");
+    this.appComponent.getCartForCustomer();
+  }
+  }
+
+  addToCart(productCode:string){
+    if(localStorage.getItem('customer_token')==undefined){
+      this.accountService.showLogin.next(true);
+    }else{
+      this.cartService.addProductToCart(productCode,1).subscribe((res:any) => {
+    })
+    alert("Product added to cart.");
+    this.appComponent.getCartForCustomer();
+  }
+  }
+
+  incrementQuantity() {
+      this.selectedQty++;
+    
+  }
+
+  decrementQuantity() {
+    if (this.selectedQty > 0) {
+      this.selectedQty--;
+    }
   }
 
 }

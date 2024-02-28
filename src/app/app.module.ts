@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 import { CartComponent } from './components/cart/cart.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { CartComponent } from './components/cart/cart.component';
     ProductDetailComponent,
     NotificationModalComponent,
     CartComponent,
+    MyAccountComponent,
   ],
   imports: [
     BrowserModule,

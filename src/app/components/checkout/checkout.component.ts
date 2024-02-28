@@ -5,6 +5,7 @@ import { CheckoutRes } from '../../interfaces/responses/checkout-res';
 import { AddressRes } from '../../interfaces/responses/address-res';
 import { OrderService } from '../../services/order.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-checkout',
@@ -42,6 +43,12 @@ export class CheckoutComponent {
   placeOrder(){
     this.orderService.placeOrder().subscribe((res:CheckoutRes) =>{})
     alert("Your order successfully completed.")
-    this.router.navigateByUrl("/");
+    this.navigateAndReload("");
+  }
+
+  navigateAndReload(url: string): void {
+    this.router.navigateByUrl(url).then(() => {
+      window.location.reload();
+    });
   }
 }
