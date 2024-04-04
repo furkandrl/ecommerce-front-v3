@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject} from 'rxjs';
 import { ProductListRes } from '../interfaces/responses/product-list-res';
 import { ProductRes } from '../interfaces/responses/product-res';
+import { ProductPageRes } from '../interfaces/responses/product-page-res';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getAllProductsByCategory(categoryCode:string): Observable<ProductListRes> {
-    return this.http.get<ProductListRes>("http://localhost:8080/c/"+categoryCode);
+  // getAllProductsByCategory(categoryCode:string): Observable<ProductListRes> {
+  //   return this.http.get<ProductListRes>("http://localhost:8080/c/"+categoryCode);
+  // }
+
+  getAllProductsByCategory(categoryCode:string, page:number): Observable<ProductPageRes> {
+    return this.http.get<ProductPageRes>("http://localhost:8080/c/"+categoryCode+"?page="+page);
   }
 
   getProductByProductCode(productCode:string): Observable<ProductRes> {
