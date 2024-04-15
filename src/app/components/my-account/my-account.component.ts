@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { OrderListRes } from '../../interfaces/responses/order-list-res';
-import { OrderService } from '../../services/order.service';
-import { OrderListRes } from '../../interfaces/responses/order-list-res';
 
 @Component({
   selector: 'app-my-account',
