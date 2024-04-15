@@ -48,7 +48,7 @@
                                         <li>
                                             <div class="d-flex justify-content-between fruite-name" *ngFor="let category of categoriesArray">
                                                 
-                                                <button class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" (click)="selectCategory(category.code)"> {{category.name}}
+                                                <button class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" (click)="selectCategory(category.code, 0)"> {{category.name}}
                                                 </button>
                                             </div>
                                         </li>
