@@ -26,9 +26,6 @@ export class ProductListComponent {
     
   }
   
-  
-
-
   ngOnInit(): void {
     this.getAllCategories();
     this.getProductsByCateogry();

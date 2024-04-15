@@ -8,6 +8,10 @@
     box-shadow: none;
 }
 
+.card {
+    width: 70%;
+  }
+
 a:hover {
     color: red !important;
 }

@@ -1,16 +1,125 @@
 <div class="container">
+    <div class="row" *ngFor="let order of ordersArray">
+      
+        <div class="card">
+          <div class="card-body" >
+            <h5 class="card-title">Order ID: {{order.pk}}</h5>
+            <p class="card-text">Product: {{order.product}}</p>
+            <p class="card-text">Quantity: {{ order.totalPrice }}</p>
+            <p class="card-text">Total: ${{order.totalPrice | number: '1.2-2'}}</p>
+            <p class="card-text">Quantity: {{ order }}</p>
+            <!-- You can add more details here as per your requirement -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
     <div class="row">
-      <div class="col" *ngFor="let order of orders">
+      <div class="col-md-4 mb-4" *ngFor="let order of ordersArray">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Order ID: {{ order.id }}</h5>
-            <p class="card-text">Product: {{ order.product }}</p>
-            <p class="card-text">Quantity: {{ order.quantity }}</p>
-            <p class="card-text">Total: {{ order.total }}</p>
-            <!-- You can add more details here as per your requirement -->
+            <h5 class="card-title">Order ID: {{ order.pk }}</h5>
+            <p class="card-text">Total Price: {{ order.totalPrice }}</p>
+            <!-- Button to toggle details -->
+            <button class="btn btn-primary" (click)="toggleDetails()">Show Details</button>
+            <!-- Details section (hidden by default) -->
+            <div *ngIf="showDetails">
+              <h6>Order Details:</h6>
+              <div class="order-details">
+                <div class="order-entry" *ngFor="let entry of order.entries">
+                  <img [src]="entry.product.image" alt="Product Image">
+                  <p>Product Quantity: {{ entry.quantity }}</p>
+                  <p>Price Per Product: {{ entry.product.price }}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="container-fluid" >
+    <div class="row" *ngFor="let order of ordersArray">
+      <div class="d-flex justify-content-center" >
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Order ID: {{ order.id }}</h5>
+            <p class="card-text">Total Price: {{ order.totalPrice }}</p>
+            <!-- Button to toggle details -->
+            <button class="btn btn-primary" (click)="toggleDetails()">Show Details</button>
+            <!-- Details section (hidden by default) -->
+            <div *ngIf="showDetails">
+              <h6>Order Details:</h6>
+              <div class="order-details">
+                <div class="order-entry" *ngFor="let entry of order.entries">
+                  <img [src]="entry.product.image" alt="Product Image">
+                  <p>Product Quantity: {{ entry.quantity }}</p>
+                  <p>Price Per Product: {{ entry.product.price }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-lg-12 col-xl-">
+    <div class="table-responsive" *ngFor="let order of ordersArray">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Products</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entry of order.entries">
+                    <th scope="row">
+                        <div class="d-flex align-items-center mt-2">
+                            <img src="{{entry.product.picture}}"  style="width: 90px; height: 90px;  border-radius: 50%;" alt="">
+                        </div>
+                    </th>
+                    <td class="py-5">{{entry.product.name}}</td>
+                    <td class="py-5">${{entry.product.price | number: '1.2-2'}}</td>
+                    <td class="py-5">{{entry.quantity}}</td>
+                    <td class="py-5">${{entry.product.price*entry.quantity | number: '1.2-2'}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                    </th>
+                    <td class="py-5">
+                        <p class="mb-0 text-dark py-4">Shipping</p>
+                    </td>
+                    <td class="py-5"></td>
+                    <td class="py-5"></td>
+                    <td class="py-5">
+                        <div class="py-3 border-bottom border-top">
+                            <p class="mb-0 text-dark">$0.00</p>
+                        </div>
+                    </td>
+                </tr>   
+                <tr>
+                    <th scope="row">
+                    </th>
+                    <td class="py-5">
+                        <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                    </td>
+                    <td class="py-5"></td>
+                    <td class="py-5"></td>
+                    <td class="py-5">
+                        <div class="py-3 border-bottom border-top">
+                            <p class="mb-0 text-dark">$</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
   
