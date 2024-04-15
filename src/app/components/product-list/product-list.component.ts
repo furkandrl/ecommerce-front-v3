@@ -19,11 +19,13 @@ export class ProductListComponent {
   productsArray:any[] = [];
   categoriesArray:any[]=[];
   selectedCategory:string="cat1";
+  selectedCatName?:string;
   recommendedProducts:ProductRes[]=[];
   showRecommended:boolean=false;
-  selectedPage:number=0;
-  totalPages:number = 0;
-  pageNumber:number = 1;
+  selectedPage:number=0;//in backend page count starts with 0
+  totalPages:number = 1;
+  pageNumber:number = this.selectedPage+1;
+  visiblePageNumbers: number[] = [];
 
   constructor(private productService:ProductService, private accountService:AccountService, private cartService:CartService,
     private categoryService:CategoryService, private appComponent:AppComponent){
@@ -32,9 +34,9 @@ export class ProductListComponent {
   
   ngOnInit(): void {
     this.getAllCategories();
-    this.getProductsByCateogry(this.selectedPage);
+    this.getProductsByCategory(this.selectedPage);
     this.getRecommendedProducts();
-    
+
   }
   
 
@@ -46,19 +48,21 @@ export class ProductListComponent {
    
   // }
 
-  getProductsByCateogry(page: number) {
+  getProductsByCategory(page: number) {
     this.productService.getAllProductsByCategory(this.selectedCategory, page).subscribe((res: ProductPageRes) =>{
       this.productsArray = res.products.content;
-      this.selectedCategory=res.category.name;
-      this.pageNumber=page;
+      this.selectedCategory=res.category.code;
+      this.selectedPage=page;
       this.totalPages=res.products.totalPages;
+      this.selectedCatName=res.category.name;
+      this.updateVisiblePageNumbers();
     })
-   
+    
   }
 
   onPageChanged(page: number){
-    this.pageNumber=page;
-    this.getProductsByCateogry(this.pageNumber);
+    this.selectedPage=page;
+    this.getProductsByCategory(this.selectedPage);
   }
 
   addToCart(productCode:string){
@@ -90,7 +94,11 @@ export class ProductListComponent {
     this.selectedCategory=categoryCode;
     this.productService.getAllProductsByCategory(this.selectedCategory, page).subscribe((res: ProductPageRes) =>{
       this.productsArray = res.products.content;
-      this.selectedCategory=res.category.name;
+      this.selectedCategory=res.category.code;
+      this.selectedCatName=res.category.name;
+      this.selectedPage=0;
+      this.totalPages=res.products.totalPages;
+      this.updateVisiblePageNumbers();
     })
   }
 
@@ -99,8 +107,49 @@ export class ProductListComponent {
       this.recommendedProducts = res.products;
     })
   }
+
+  previousPage(): void {
+    if (this.selectedPage > 0) {
+      this.selectedPage--;
+      this.getProductsByCategory(this.selectedPage);
+    }
+  }
+  
+  goToPage(page: number): void {
+    if (page !== this.selectedPage) {
+      this.selectedPage = page;
+      this.getProductsByCategory(this.selectedPage);
+    }
+  }
+  
+  nextPage(): void {
+    if (this.selectedPage < this.totalPages-1) {
+      this.selectedPage++;
+      this.getProductsByCategory(this.selectedPage);
+    }
+  }
+
+  updateVisiblePageNumbers(): void {
+    const maxVisiblePages = 5;
+    const halfMaxVisiblePages = Math.floor(maxVisiblePages / 2);
+    let startPage = Math.max(1, this.selectedPage+1 - halfMaxVisiblePages);
+    const endPage = Math.min(this.totalPages, startPage + maxVisiblePages - 1);
+    
+    if (endPage === this.totalPages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    this.visiblePageNumbers = [];
+    for (let i = startPage; i <= endPage; i++) {
+      this.visiblePageNumbers.push(i);
+    }
+  }
+
 }
 
+
+  
+ 
 
 
 
