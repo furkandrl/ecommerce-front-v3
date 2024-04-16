@@ -19,8 +19,8 @@ export class MyAccountComponent {
 
   showDetails:boolean = false;
 
-  toggleDetails(): void {
-    this.showDetails = !this.showDetails;
+  toggleDetails(order:any): void {
+    order.showDetails = !order.showDetails;
   }
 
   getOrdersForCustomer(){

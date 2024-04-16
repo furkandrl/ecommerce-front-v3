@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
     <div class="row" *ngFor="let order of ordersArray">
       
         <div class="card">
@@ -8,12 +8,12 @@
             <p class="card-text">Quantity: {{ order.totalPrice }}</p>
             <p class="card-text">Total: ${{order.totalPrice | number: '1.2-2'}}</p>
             <p class="card-text">Quantity: {{ order }}</p>
-            <!-- You can add more details here as per your requirement -->
+            
           
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 
   <div class="container">
     <div class="row">
@@ -21,17 +21,20 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Order ID: {{ order.pk }}</h5>
-            <p class="card-text">Total Price: {{ order.totalPrice }}</p>
-            <!-- Button to toggle details -->
-            <button class="btn btn-primary" (click)="toggleDetails()">Show Details</button>
-            <!-- Details section (hidden by default) -->
+            <p class="card-text">Total Price: ${{ order.totalPrice }}</p>
+            
+            <button class="btn btn-primary" (click)="toggleDetails(order)">Show Details</button>
+            
             <div *ngIf="showDetails">
               <h6>Order Details:</h6>
               <div class="order-details">
                 <div class="order-entry" *ngFor="let entry of order.entries">
-                  <img [src]="entry.product.image" alt="Product Image">
-                  <p>Product Quantity: {{ entry.quantity }}</p>
-                  <p>Price Per Product: {{ entry.product.price }}</p>
+                  <div class="fruite-img">
+                    <img [src]="entry.product.picture" class="img-fluid w-100 rounded-top" [routerLink]="['/p', entry.product.code]" alt="Product Image">
+                    </div>
+                  <p>{{entry.product.name}} x {{ entry.quantity }}</p>  
+                  <p>Product Quantity: </p>
+                  <p>Price Per Product: ${{ entry.product.price }}</p>
                 </div>
               </div>
             </div>
@@ -46,16 +49,18 @@
       <div class="d-flex justify-content-center" >
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title">Order ID: {{ order.id }}</h5>
-            <p class="card-text">Total Price: {{ order.totalPrice }}</p>
-            <!-- Button to toggle details -->
-            <button class="btn btn-primary" (click)="toggleDetails()">Show Details</button>
-            <!-- Details section (hidden by default) -->
+            <h5 class="card-title">Order ID: {{ order.pk }}</h5>
+            <p class="card-text">Total Price: ${{ order.totalPrice }}</p>
+            
+            <button class="btn btn-primary" (click)="toggleDetails(order)">Show Details</button>
+            
             <div *ngIf="showDetails">
               <h6>Order Details:</h6>
               <div class="order-details">
                 <div class="order-entry" *ngFor="let entry of order.entries">
-                  <img [src]="entry.product.image" alt="Product Image">
+                  <div class="fruite-img">
+                  <img [src]="entry.product.picture" class="img-fluid w-10 rounded-top" [routerLink]="['/p', entry.product.code]" alt="Product Image">
+                  </div>
                   <p>Product Quantity: {{ entry.quantity }}</p>
                   <p>Price Per Product: {{ entry.product.price }}</p>
                 </div>
@@ -66,7 +71,44 @@
       </div>
     </div>
   </div>
+------------------
+-->
+<div class="container-fluid">
+  <div class="row" *ngFor="let order of ordersArray">
+    <div class="d-flex justify-content-center col-12">
+      <div class="card mb-4" [ngClass]="{'col-md-4': order.entries.length <= 4, 'col-md-6': order.entries.length > 4 && order.entries.length <= 8, 'col-md-12': order.entries.length > 8}">
+        <div class="card-body">
+          <h5 class="card-title">Order ID: {{ order.pk }}</h5>
+          <p class="card-text">Total Price: ${{ order.totalPrice | number: '1.2-2' }}</p>
+          <!-- Button to toggle details -->
+          <button class="btn btn-primary" (click)="toggleDetails(order)">{{order.showDetails ? 'Hide Details' : 'Show Details'}} </button>
+          <!-- Details section (hidden by default) -->
+          <div *ngIf="order.showDetails">
+            <h6>Order Details:</h6>
+            <div class="row">
+              <ng-container *ngFor="let entry of order.entries; let i = index;">
+                <div class="col-md-4">
+                  <div class="order-entry">
+                    <div class="fruite-img">
+                      <img [src]="entry.product.picture" class="img-fluid w-50 rounded-top" [routerLink]="['/p', entry.product.code]" alt="Product Image">
+                    </div>
+                    <p>{{entry.product.name}}</p>
+                    <p>Product Quantity: {{ entry.quantity }}</p>
+                    <p>Price Per Product: ${{ entry.product.price }}</p>
+                  </div>
+                </div>
+                <!-- Clearfix to ensure proper alignment in each row -->
+                <div *ngIf="(i + 1) % 3 == 0" class="clearfix"></div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+  <!--
   <div class="col-md-12 col-lg-12 col-xl-">
     <div class="table-responsive" *ngFor="let order of ordersArray">
         <table class="table">
@@ -121,5 +163,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div>-->
   

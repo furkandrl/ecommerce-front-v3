@@ -14,4 +14,6 @@ export interface OrderRes {
     shippingTrackingLink:string;
 
     createdAt:string;
+
+    showDeatils:boolean;
 }
