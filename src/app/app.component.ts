@@ -86,6 +86,7 @@ export class AppComponent {
   logout(){
     localStorage.removeItem('customer_token')
     alert('You logged out.');
+    this.router.navigateByUrl('/');
     window.location.reload();
     
   }
