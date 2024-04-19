@@ -9,4 +9,5 @@ export interface ProductRes {
     price:number;
     categoryCode:string;
     keywords:string[];
+    avgRating:number;
 }

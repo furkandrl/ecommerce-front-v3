@@ -18,6 +18,7 @@ export class ProductDetailComponent {
   product: any={};
   productCode :string='';
   selectedQty: number=1;
+  rating:number=0;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private accountService:AccountService,
     private appComponent:AppComponent, private cartService:CartService){}
@@ -33,6 +34,8 @@ export class ProductDetailComponent {
   getProductByCode(productCode: string){
     this.productService.getProductByProductCode(productCode).subscribe((res:ProductRes) =>{
       this.product = res;
+      console.log(res.avgRating);
+      this.rating=res.avgRating;
     })
   }
 
@@ -73,6 +76,14 @@ export class ProductDetailComponent {
     if (this.selectedQty > 0) {
       this.selectedQty--;
     }
+  }
+
+  getStars(): boolean[] {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(i <= this.rating);
+    }
+    return stars;
   }
 
 }

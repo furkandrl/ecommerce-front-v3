@@ -13,6 +13,14 @@
                         <h4 class="fw-bold mb-3">{{product.name}}</h4>
                         <p class="mb-3">Product Code: {{product.code}}</p>
                         <h5 class="fw-bold mb-3">${{product.price | number: '1.2-2'}}</h5>
+                        <div class="stars">
+                            <!-- Loop through the stars array to display stars -->
+                            <span *ngFor="let filled of getStars(); let i = index">
+                              <!-- Font Awesome star icons (filled or empty) -->
+                              <i class="fa fa-star" [ngClass]="{ 'filled': filled, 'empty': !filled }"></i>
+                            </span>
+                          </div>
+                          <br>
                         
                         <p class="mb-4">{{product.description}}</p>
                         

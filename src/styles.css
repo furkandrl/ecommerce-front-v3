@@ -8,6 +8,24 @@
     box-shadow: none;
 }
 
+.stars {
+    display: flex;
+  }
+  
+  .fa-star {
+    font-size: 24px;
+    margin-right: 5px;
+    cursor: default;
+  }
+  
+  .fa-star.filled {
+    color: #ffd700; /* Gold color for filled stars */
+  }
+  
+  .fa-star.empty {
+    color: #d3d3d3; /* Light gray for empty stars */
+  }
+
 .card {
     width: 70%;
   }
