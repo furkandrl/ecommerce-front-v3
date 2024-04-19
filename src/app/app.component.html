@@ -91,11 +91,18 @@
                               </div>
                         </li>
                         
-                        <li  >
+                        <li>
                               <ng-template #Logged>
                              <button class="btn btn-danger rounded-0 px-3" (click)="logout()">Logout</button>  
+                             <button class="btn btn-danger rounded-0 px-3" [routerLink]="['/my-account']">My Account</button>  
                             </ng-template>
-                      </li>
+                        </li>
+                        <li>
+                            <ng-template #Logged>
+                           
+                          </ng-template>
+                        </li>
+                        
 
                       </ul> 
                   </li>

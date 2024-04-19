@@ -73,6 +73,11 @@
   </div>
 ------------------
 -->
+
+<div *ngIf="ordersArray.length !=0" class="d-flex justify-content-center col-12">
+  <h1>Your Orders</h1>
+  <br>
+</div>
 <div class="container-fluid">
   <div class="row" *ngFor="let order of ordersArray">
     <div class="d-flex justify-content-center col-12">
@@ -84,7 +89,7 @@
           <button class="btn btn-primary" (click)="toggleDetails(order)">{{order.showDetails ? 'Hide Details' : 'Show Details'}} </button>
           <!-- Details section (hidden by default) -->
           <div *ngIf="order.showDetails">
-            <h6>Order Details:</h6>
+            <br>
             <div class="row">
               <ng-container *ngFor="let entry of order.entries; let i = index;">
                 <div class="col-md-4">

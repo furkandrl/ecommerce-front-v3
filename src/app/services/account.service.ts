@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { CustomerRegister } from '../interfaces/requests/customer-register';
 import { CustomerLogin } from '../interfaces/requests/customer-login';
 import { CustomerLoginRes } from '../interfaces/responses/customer-login-res';
+import { CustomerRes } from '../interfaces/responses/customer-res';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class AccountService {
 
   loginCustomer(customerLogin:CustomerLogin):Observable<CustomerLoginRes> {
     return this.http.post<CustomerLoginRes>("http://localhost:8080/authenticate", customerLogin);
+  }
+
+  getCustomerProfile(): Observable<CustomerRes> {
+    return this.http.get<CustomerRes>("http://localhost:8080/my-account/profile");
   }
 
   
