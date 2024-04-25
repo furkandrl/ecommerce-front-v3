@@ -6,6 +6,7 @@ import { AddressRes } from '../../interfaces/responses/address-res';
 import { OrderService } from '../../services/order.service';
 import { Router } from '@angular/router';
 import { AppComponent } from '../../app.component';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,8 +23,14 @@ export class CheckoutComponent {
 
   customerAddresses: AddressRes[]=[];
 
+  addressObj:any={
+    "code":"",
+    "name":"",
+    "address":""
+  }
+
   constructor( private checkoutService: CheckoutService, private orderService: OrderService,
-    private router:Router){
+    private accountService: AccountService, private router:Router){
     
   }
 
@@ -50,5 +57,15 @@ export class CheckoutComponent {
     this.router.navigateByUrl(url).then(() => {
       window.location.reload();
     });
+  }
+
+  addAddress(){
+    this.addressObj.code=this.addressObj.name+Math.floor(Math.random() * 999999);
+    this.accountService.addAddressToCustomer(this.addressObj).subscribe((res:any) => {
+    }//,
+    //(error:Error) => alert(error.message)
+  )
+  window.location.reload();
+
   }
 }
