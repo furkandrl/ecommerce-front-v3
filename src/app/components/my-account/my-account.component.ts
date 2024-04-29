@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { OrderListRes } from '../../interfaces/responses/order-list-res';
 import { AccountService } from '../../services/account.service';
@@ -58,17 +58,19 @@ export class MyAccountComponent {
     })
   }
 
-  setRating(code:string, star:number): void {
+  setRating(entry:EntryRes, star:number): void {
     this.ratingStar = star;
     this.ratingChange.emit(this.ratingStar);
-    this.saveRating(code, star);
+    entry.product.customerGivenStar=star;
+    this.saveRating(entry.product.code, star);
+    
   }
 
   saveRating(productCode:string, star:number){
     this.saveStarObj.productCode=productCode;
     this.saveStarObj.customerGivenStar=star;
     this.productService.saveCustomerGivenStar(this.saveStarObj).subscribe((res:any)=>{
-    this.getOrdersForCustomer;
+      
     })
   }
 

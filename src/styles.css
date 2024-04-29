@@ -37,7 +37,7 @@
     background-color: transparent; /* Grey background box */
     border: none;
     border-radius: 5px; /* Optional: rounding the corners */
-    padding: 5px; /* Optional: padding inside the button */
+    padding: 0; /* Optional: padding inside the button */
     cursor: pointer;
     outline: none;
 }

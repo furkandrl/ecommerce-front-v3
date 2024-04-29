@@ -101,7 +101,8 @@
                     <p>Product Quantity: {{ entry.quantity }}</p>
                     <p>Price Per Product: ${{ entry.product.price }}</p>
                     <div class="rating-container">
-                      <button *ngFor="let star of stars; index as i" (click)="setRating(entry.product.code, i + 1)" class="star-button">
+                      Give your rating
+                      <button *ngFor="let star of stars; index as i" (click)="setRating(entry, i + 1)" class="star-button">
                         <span [ngClass]="{'filled-star': i < entry.product.customerGivenStar, 'empty-star': i >= entry.product.customerGivenStar}">&#9733;</span>
                       </button>
                     </div>
