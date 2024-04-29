@@ -8,6 +8,8 @@
     box-shadow: none;
 }
 
+/* rating stars starts */
+
 .stars {
     display: flex;
   }
@@ -26,6 +28,29 @@
     color: #d3d3d3; /* Light gray for empty stars */
   }
 
+  .rating-container {
+    display: flex;
+    gap: 5px; /* Optional: spacing between stars */
+}
+
+.star-button {
+    background-color: transparent; /* Grey background box */
+    border: none;
+    border-radius: 5px; /* Optional: rounding the corners */
+    padding: 5px; /* Optional: padding inside the button */
+    cursor: pointer;
+    outline: none;
+}
+
+.empty-star {
+    color: lightgrey; 
+    font-size: 1.5em;/* Unfilled star color */
+}
+
+.filled-star {
+    color: gold;
+    font-size: 1.5em;
+}
 .card {
     width: 70%;
   }
