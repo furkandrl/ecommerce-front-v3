@@ -35,6 +35,7 @@ export class MyAccountComponent {
 
   ngOnInit(): void {
     this.getOrdersForCustomer();
+    this.getCustomerProfile();
   }
 
   showDetails:boolean = false;

@@ -1,0 +1,15 @@
+.customer-details {
+    border: 1px solid #ccc;
+    padding: 16px;
+    width: 300px;
+    margin: 16px auto;
+    border-radius: 8px;
+  }
+  
+  .customer-details h2 {
+    margin-top: 0;
+  }
+  
+  .customer-details p {
+    margin: 8px 0;
+  }

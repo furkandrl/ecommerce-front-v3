@@ -74,6 +74,13 @@
 ------------------
 -->
 
+<div class="customer-details">
+  <h2>Customer Details</h2>
+  <p><strong>Username:</strong> {{ customerObj.username }}</p>
+  <p><strong>First Name:</strong> {{ customerObj.firstName }}</p>
+  <p><strong>Last Name:</strong> {{ customerObj.lastName }}</p>
+</div>
+
 <div *ngIf="ordersArray.length !=0" class="d-flex justify-content-center col-12">
   <h1>Your Orders</h1>
   <br>
