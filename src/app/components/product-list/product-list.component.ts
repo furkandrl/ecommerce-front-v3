@@ -18,11 +18,11 @@ export class ProductListComponent {
 
   productsArray:any[] = [];
   categoriesArray:any[]=[];
-  selectedCategory:string="cat1";
+  selectedCategory?: string | null = "cat1";
   selectedCatName?:string;
   recommendedProducts:ProductRes[]=[];
   showRecommended:boolean=false;
-  selectedPage:number=0;//in backend page count starts with 0
+  selectedPage:number=0;//in backend, page count starts with 0
   totalPages:number = 1;
   pageNumber:number = this.selectedPage+1;
   visiblePageNumbers: number[] = [];
@@ -33,9 +33,13 @@ export class ProductListComponent {
   }
   
   ngOnInit(): void {
+    if(localStorage.getItem('selected_category')){
+      this.selectedCategory=localStorage.getItem('selected_category');
+    }
     this.getAllCategories();
     this.getProductsByCategory(this.selectedPage);
     this.getRecommendedProducts();
+    
 
   }
   
@@ -49,12 +53,14 @@ export class ProductListComponent {
   // }
 
   getProductsByCategory(page: number) {
-    this.productService.getAllProductsByCategory(this.selectedCategory, page).subscribe((res: ProductPageRes) =>{
+    this.productService.getAllProductsByCategory(this.selectedCategory!=null ? this.selectedCategory : "cat1", page).subscribe((res: ProductPageRes) =>{
       this.productsArray = res.products.content;
-      this.selectedCategory=res.category.code;
+      //this.selectedCategory=res.category.code;
       this.selectedPage=page;
       this.totalPages=res.products.totalPages;
       this.selectedCatName=res.category.name;
+      localStorage.removeItem('selected_category');
+      localStorage.setItem('selected_category', res.category.code);
       this.updateVisiblePageNumbers();
     })
     
@@ -92,6 +98,7 @@ export class ProductListComponent {
 
   selectCategory(categoryCode:string, page:number){
     this.selectedCategory=categoryCode;
+    localStorage.setItem('selected_category', categoryCode);
     this.productService.getAllProductsByCategory(this.selectedCategory, page).subscribe((res: ProductPageRes) =>{
       this.productsArray = res.products.content;
       this.selectedCategory=res.category.code;
