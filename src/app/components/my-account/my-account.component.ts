@@ -5,6 +5,7 @@ import { AccountService } from '../../services/account.service';
 import { CustomerRes } from '../../interfaces/responses/customer-res';
 import { ProductService } from '../../services/product.service';
 import { EntryRes } from '../../interfaces/responses/entry-res';
+import { AddressRes } from '../../interfaces/responses/address-res';
 
 @Component({
   selector: 'app-my-account',
@@ -30,12 +31,28 @@ export class MyAccountComponent {
     "customerGivenStar":""
   }
 
+  newAddress:any={
+    "code":"",
+    "name":"",
+    "address":""
+  }
+
+  editAddress:any={
+    "code":"",
+    "name":"",
+    "address":""
+  }
+
+
+  addressesArray:any[] = [];
+
   constructor(private orderService: OrderService , private accountService: AccountService,
     private productService: ProductService){}
 
   ngOnInit(): void {
     this.getOrdersForCustomer();
     this.getCustomerProfile();
+    this.getCustomerAddresses();
   }
 
   showDetails:boolean = false;
@@ -74,5 +91,39 @@ export class MyAccountComponent {
       
     })
   }
+
+  getCustomerAddresses(){
+    this.accountService.getAddressesOfCustomer().subscribe((res: AddressRes[]) => {
+      this.addressesArray = res;
+    })
+  }
+
+  deleteAddressForCustomer(addressCode: string){
+    this.accountService.deleteAddressForCustomer(addressCode).subscribe((res: any) =>{
+      
+    })
+
+  }
+
+  addAddressToCustomer(){
+    this.newAddress.code=this.newAddress.name+Math.floor(Math.random() * 999999);
+    this.accountService.addAddressToCustomer(this.newAddress).subscribe((res:any) => {
+    }//,
+    //(error:Error) => alert(error.message)
+  )
+  window.location.reload();
+  }
+
+  updateAddressForCustomer(){
+    
+    
+  }
+
+  openEditModal(address: AddressRes, index: number): void {
+    this.editAddress = { ...address };
+  
+  }
+
+  
 
 }

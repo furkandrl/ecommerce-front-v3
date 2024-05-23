@@ -74,12 +74,101 @@
 ------------------
 -->
 
-<div class="customer-details">
-  <h2>Customer Details</h2>
-  <p><strong>Username:</strong> {{ customerObj.username }}</p>
-  <p><strong>First Name:</strong> {{ customerObj.firstName }}</p>
-  <p><strong>Last Name:</strong> {{ customerObj.lastName }}</p>
+<div class="container mt-4">
+  <div class="customer-details">
+    <h2>Customer Details</h2>
+    <p><strong>Username:</strong> {{ customerObj.username }}</p>
+    <p><strong>First Name:</strong> {{ customerObj.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ customerObj.lastName }}</p>
+  </div>
+
+  <div class="addresses mt-4">
+    <h3>Addresses</h3>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let address of addressesArray; let i = index">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ address.name }} ({{ address.code }})</h5>
+            <p class="card-text">{{ address.address }}</p>
+            <button class="btn btn-danger mr-2" (click)="deleteAddressForCustomer(address.code)">Delete</button>
+            <button class="btn btn-warning" (click)="openEditModal(address, i)" data-toggle="modal" data-target="#editAddressModal">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary mt-4" data-toggle="modal" data-target="#addAddressModal">Add New Address</button>
+
+  <!-- Add Address Modal -->
+  <div class="modal fade" id="addAddressModal" tabindex="-1" role="dialog" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addAddressModalLabel">Add New Address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="code">Code:</label>
+            <input id="code" [(ngModel)]="newAddress.code" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" [(ngModel)]="newAddress.name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input id="address" [(ngModel)]="newAddress.address" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="addAddressToCustomer()">Add Address</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Address Modal -->
+  <div class="modal fade" id="editAddressModal" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editAddressModalLabel">Edit Address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="editCode">Code:</label>
+            <input id="editCode" [(ngModel)]="editAddress.code" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="editName">Name:</label>
+            <input id="editName" [(ngModel)]="editAddress.name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="editAddress">Address:</label>
+            <input id="editAddress" [(ngModel)]="editAddress.address" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updateAddressForCustomer()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+
+<!--         YOUR ORDERS SECTION     -->
 
 <div *ngIf="ordersArray.length !=0" class="d-flex justify-content-center col-12">
   <h1>Your Orders</h1>

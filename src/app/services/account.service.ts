@@ -6,6 +6,7 @@ import { CustomerLogin } from '../interfaces/requests/customer-login';
 import { CustomerLoginRes } from '../interfaces/responses/customer-login-res';
 import { CustomerRes } from '../interfaces/responses/customer-res';
 import { Address } from '../interfaces/requests/address';
+import { AddressRes } from '../interfaces/responses/address-res';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,13 @@ export class AccountService {
   addAddressToCustomer(addressReq:Address):Observable<any>{
     return this.http.post<any>("http://localhost:8080/my-account/create-address", addressReq);
   }
+
+  getAddressesOfCustomer():Observable<AddressRes[]>{
+    return this.http.get<AddressRes[]>("http://localhost:8080/my-account/addresses");
+  }
   
+  deleteAddressForCustomer(addressCode: string):Observable<any>{
+    return this.http.delete<any>("http://localhost:8080/my-account/delete-address/"+addressCode);
+  }
 
 }

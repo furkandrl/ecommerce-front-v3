@@ -135,13 +135,12 @@
 
                                 <form action="#" class="signin-form">
                                     <div class="form-group mt-3">
-                                        <input type="text" name="UserName" [(ngModel)]="loginObj.username" class="form-control" required>
                                         <label class="form-control-placeholder" for="username">Username</label>
+                                        <input type="text" name="UserName" [(ngModel)]="loginObj.username" class="form-control" required>
                                     </div>
                                     <div class="form-group mt-4">
-                                        <input id="password-field"  name="UserPassword"  [(ngModel)]="loginObj.password" type="password" class="form-control" required>
                                         <label class="form-control-placeholder" for="password">Password</label>
-                                        
+                                        <input id="password-field"  name="UserPassword"  [(ngModel)]="loginObj.password" type="password" class="form-control" required>    
                                     </div>
                                     <div class="form-group">
                                         <button type="button" (click)="onLogin()"
@@ -177,20 +176,20 @@
                 <div class="container">
                     <div class="row"> 
                         <div class="col-12 my-2">
-                            <input type="text" [(ngModel)]="registerObj.username" class="form-control">
                             <label for="">Set Username</label>
+                            <input type="text" [(ngModel)]="registerObj.username" class="form-control">
                         </div>
                         <div class="col-12 my-2">
-                            <input type="text" [(ngModel)]="registerObj.firstName" class="form-control">
                             <label for="">Set First Name</label>
+                            <input type="text" [(ngModel)]="registerObj.firstName" class="form-control">
                         </div>
                         <div class="col-12 my-2">
-                            <input type="text" [(ngModel)]="registerObj.lastName" class="form-control">
                             <label for="">Set Last Name</label>
+                            <input type="text" [(ngModel)]="registerObj.lastName" class="form-control">
                         </div>
                         <div class="col-12 my-2">
-                            <input type="password" [(ngModel)]="registerObj.password" class="form-control">
                             <label for="">Set Password</label>
+                            <input type="password" [(ngModel)]="registerObj.password" class="form-control">
                         </div>  
                     </div>
                 </div>
