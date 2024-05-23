@@ -100,7 +100,7 @@ export class MyAccountComponent {
 
   deleteAddressForCustomer(addressCode: string){
     this.accountService.deleteAddressForCustomer(addressCode).subscribe((res: any) =>{
-      
+
     })
 
   }
@@ -119,7 +119,7 @@ export class MyAccountComponent {
     
   }
 
-  openEditModal(address: AddressRes, index: number): void {
+  openEditModal(address: AddressRes): void {
     this.editAddress = { ...address };
   
   }
