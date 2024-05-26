@@ -102,6 +102,7 @@ export class MyAccountComponent {
     this.accountService.deleteAddressForCustomer(addressCode).subscribe((res: any) =>{
 
     })
+    window.location.reload();
 
   }
 
