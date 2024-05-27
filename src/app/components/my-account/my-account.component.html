@@ -82,9 +82,9 @@
     <p><strong>Last Name:</strong> {{ customerObj.lastName }}</p>
   </div>
 
-  <div class="addresses mt-4">
-    <h3>Addresses</h3>
-    <div class="row">
+  <div class="addresses mt-4" >
+    <h3>Your Addresses</h3>
+    <div class="row" *ngIf="addressesArray!=null && addressesArray.length>0 ">
       <div class="col-md-4" *ngFor="let address of addressesArray; let i = index">
         <div class="card mb-4">
           <div class="card-body">
@@ -98,6 +98,10 @@
     </div>
   </div>
 
+  <div class="addresses mt-4" *ngIf="addressesArray==null ||  addressesArray.length<0 ">
+      <p>You have no saved address.</p>
+  </div>
+  
   <button class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#addAddressModal">Add New Address</button>
 
 <!-- Add Address Modal -->
@@ -105,7 +109,7 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addAddressModalLabel">Add Address</h5>
+                <h5 class="modal-title" id="addAddressModalLabel">Add New Address</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -137,14 +141,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="editAddressModalLabel">Edit Address</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
           </button>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label for="editCode">Code:</label>
-            <input id="editCode" [(ngModel)]="editAddress.code" class="form-control">
+            <input id="editCode" [(ngModel)]="editAddress.code" class="form-control" readonly>
           </div>
           <div class="form-group">
             <label for="editName">Name:</label>
@@ -169,11 +172,11 @@
 
 <!--         YOUR ORDERS SECTION     -->
 
-<div *ngIf="ordersArray.length !=0" class="d-flex justify-content-center col-12">
+<div  class="d-flex justify-content-center col-12">
   <h1>Your Orders</h1>
   <br>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="ordersArray.length !=0">
   <div class="row" *ngFor="let order of ordersArray">
     <div class="d-flex justify-content-center col-12">
       <div class="card mb-4" [ngClass]="{'col-md-4': order.entries.length <= 4, 'col-md-6': order.entries.length > 4 && order.entries.length <= 8, 'col-md-12': order.entries.length > 8}">
@@ -212,6 +215,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="d-flex justify-content-center col-12" *ngIf="ordersArray.length == 0 || ordersArray == null">
+  <p>You have no order yet.</p>
 </div>
 
 

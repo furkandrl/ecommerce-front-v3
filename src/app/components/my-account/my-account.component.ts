@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, Renderer2} from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { OrderListRes } from '../../interfaces/responses/order-list-res';
 import { AccountService } from '../../services/account.service';
@@ -14,6 +14,7 @@ import { AddressRes } from '../../interfaces/responses/address-res';
 })
 export class MyAccountComponent {
 
+  //@ViewChild('editModal') editAddressModal: ElementRef | undefined;
   @Input() ratingStar: number = 0;
   @Output() ratingChange = new EventEmitter<number>();
   stars: number[] = Array(5).fill(0);
@@ -47,7 +48,7 @@ export class MyAccountComponent {
   addressesArray:any[] = [];
 
   constructor(private orderService: OrderService , private accountService: AccountService,
-    private productService: ProductService){}
+    private productService: ProductService, private renderer: Renderer2){}
 
   ngOnInit(): void {
     this.getOrdersForCustomer();
@@ -115,14 +116,16 @@ export class MyAccountComponent {
   window.location.reload();
   }
 
-  updateAddressForCustomer(){
+  updateAddressForCustomer(editAddress: any){
+    
+
     
     
   }
 
-  openEditModal(address: AddressRes): void {
+  openEditModal(address: any): void {
     this.editAddress = { ...address };
-  
+    console.log(this.editAddress.name)
   }
 
   
