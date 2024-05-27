@@ -43,4 +43,8 @@ export class AccountService {
     return this.http.delete<any>("http://localhost:8080/my-account/delete-address/"+addressCode);
   }
 
+  editAddressOfcustomer(editedAddress: Address):Observable<any>{
+    return this.http.put<any>("http://localhost:8080/my-account/edit-address/"+editedAddress.code, editedAddress);
+  }
+
 }
