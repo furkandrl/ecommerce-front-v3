@@ -91,6 +91,7 @@
             <h5 class="card-title">{{ address.name }} ({{ address.code }})</h5>
             <p class="card-text">{{ address.address }}</p>
             <button class="btn btn-danger mr-2" (click)="deleteAddressForCustomer(address.code)">Delete</button>
+            &nbsp;
             <button class="btn btn-warning" (click)="openEditModal(address)" data-toggle="modal" data-target="#editAddressModal">Edit</button>
           </div>
         </div>

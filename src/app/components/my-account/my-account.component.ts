@@ -116,7 +116,7 @@ export class MyAccountComponent {
   window.location.reload();
   }
 
-  updateAddressForCustomer(editAddress: any){
+  updateAddressForCustomer(){
     
 
     
