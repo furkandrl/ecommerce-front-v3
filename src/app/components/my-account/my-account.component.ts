@@ -116,9 +116,12 @@ export class MyAccountComponent {
   window.location.reload();
   }
 
-  updateAddressForCustomer(){
-    
+  updateAddressForCustomer(address: any){
+    this.editAddress = { ...address };
+    this.accountService.editAddressOfcustomer(this.editAddress).subscribe((res : any) =>{
 
+    })
+    window.location.reload();
     
     
   }
