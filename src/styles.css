@@ -93,7 +93,7 @@ a:hover {
 }
 
 .nav-yellow {
-    background-color: #e6bd6d  !important;
+    background-color: #d6e2ef !important;
 }
 .menuOnLeft { 
     background-color: #f9f9f9;
@@ -672,16 +672,29 @@ fruite-img img {
 
 
 /*** Footer Start ***/
-.footer .footer-item .btn-link {
-    line-height: 35px;
-    color: rgba(255, 255, 255, .5);
-    transition: 0.5s;
-}
-
-.footer .footer-item .btn-link:hover {
-    color: var(--bs-secondary) !important;
-}
-
-.footer .footer-item p.mb-4 {
-    line-height: 35px;
-}
+.footer {
+    background-color: #343a40; /* Change this color to your preference */
+    color: #ffffff; /* Adjust text color for better contrast */
+    border-top: 1px solid #dee2e6;
+  }
+  .footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer .row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .footer .col-md-4 {
+    max-width: 300px;
+    text-align: center;
+  }
+  .footer .social-icons a {
+    color: #ffffff; /* Change this color to your preference */
+    margin: 0 10px;
+  }
+  .footer .social-icons a.instagram {
+    color: #f54242;
+  }
